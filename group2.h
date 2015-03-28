@@ -36,6 +36,7 @@ DEFINE_RELATION(D, A, D);
 DEFINE_RELATION(D, B, C);
 DEFINE_RELATION(D, C, A);
 DEFINE_RELATION(D, D, B);
+#undef DEFINE_RELATION
 
 template <typename T>
 class Element {
