@@ -15,73 +15,27 @@ class D {};
 template <typename LHS, typename RHS>
 struct Mult {};
 
-template <>
-struct Mult<Elements::A, Elements::A> {
-  using type = Elements::A;
-};
-template <>
-struct Mult<Elements::A, Elements::B> {
-  using type = Elements::B;
-};
-template <>
-struct Mult<Elements::A, Elements::C> {
-  using type = Elements::C;
-};
-template <>
-struct Mult<Elements::A, Elements::D> {
-  using type = Elements::D;
-};
-
-template <>
-struct Mult<Elements::B, Elements::A> {
-  using type = Elements::B;
-};
-template <>
-struct Mult<Elements::B, Elements::B> {
-  using type = Elements::A;
-};
-template <>
-struct Mult<Elements::B, Elements::C> {
-  using type = Elements::D;
-};
-template <>
-struct Mult<Elements::B, Elements::D> {
-  using type = Elements::C;
-};
-
-template <>
-struct Mult<Elements::C, Elements::A> {
-  using type = Elements::C;
-};
-template <>
-struct Mult<Elements::C, Elements::B> {
-  using type = Elements::D;
-};
-template <>
-struct Mult<Elements::C, Elements::C> {
-  using type = Elements::B;
-};
-template <>
-struct Mult<Elements::C, Elements::D> {
-  using type = Elements::A;
-};
-
-template <>
-struct Mult<Elements::D, Elements::A> {
-  using type = Elements::D;
-};
-template <>
-struct Mult<Elements::D, Elements::B> {
-  using type = Elements::C;
-};
-template <>
-struct Mult<Elements::D, Elements::C> {
-  using type = Elements::A;
-};
-template <>
-struct Mult<Elements::D, Elements::D> {
-  using type = Elements::B;
-};
+#define DEFINE_RELATION(X, Y, Z)          \
+  template <>                             \
+  struct Mult<Elements::X, Elements::Y> { \
+    using type = Elements::Z;             \
+  }
+DEFINE_RELATION(A, A, A);
+DEFINE_RELATION(A, B, B);
+DEFINE_RELATION(A, C, C);
+DEFINE_RELATION(A, D, D);
+DEFINE_RELATION(B, A, B);
+DEFINE_RELATION(B, B, A);
+DEFINE_RELATION(B, C, D);
+DEFINE_RELATION(B, D, C);
+DEFINE_RELATION(C, A, C);
+DEFINE_RELATION(C, B, D);
+DEFINE_RELATION(C, C, B);
+DEFINE_RELATION(C, D, A);
+DEFINE_RELATION(D, A, D);
+DEFINE_RELATION(D, B, C);
+DEFINE_RELATION(D, C, A);
+DEFINE_RELATION(D, D, B);
 
 template <typename T>
 class Element {
